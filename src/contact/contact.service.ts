@@ -15,6 +15,7 @@ export class ContactService {
   }
 
   async create(createContactDto: CreateContactDto): Promise<Contact> {
+    console.log('=== service createContactDto: ', createContactDto);
     const phoneNumber = '0000000000'; // TODO get from auth context
     return this.contactRepository.create({
       ...createContactDto,

@@ -14,6 +14,7 @@ export class ContactController {
 
   @Post()
   create(@Body() createContactDto: CreateContactDto): Promise<Contact> {
+    console.log('=== controller createContactDto: ', createContactDto);
     return this.contactService.create(createContactDto);
   }
 }
