@@ -1,20 +1,19 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { ContactService } from './contact.service';
-import { Contact } from './contact.entity';
+import { Contact } from 'src/database/contact.entity';
 import { CreateContactDto } from './create-contact.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('contact')
 export class ContactController {
   constructor(private readonly contactService: ContactService) {}
 
-  @Get()
-  findAll(): Promise<Contact[]> {
-    return this.contactService.findAll();
-  }
-
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createContactDto: CreateContactDto): Promise<Contact> {
-    console.log('=== controller createContactDto: ', createContactDto);
-    return this.contactService.create(createContactDto);
+  create(
+    @Request() req,
+    @Body() createContactDto: CreateContactDto,
+  ): Promise<Contact> {
+    return this.contactService.create(createContactDto, req.user);
   }
 }

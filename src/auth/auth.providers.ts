@@ -1,11 +1,12 @@
 import { DataSource } from 'typeorm';
-import { Contact } from 'src/database/contact.entity';
+import { AuthChallenge } from 'src/database/auth-challenge.entity';
 import { User } from 'src/database/user.entity';
 
-export const contactProviders = [
+export const authProviders = [
   {
-    provide: 'CONTACT_REPOSITORY',
-    useFactory: (dataSource: DataSource) => dataSource.getRepository(Contact),
+    provide: 'AUTH_CHALLENGE_REPOSITORY',
+    useFactory: (dataSource: DataSource) =>
+      dataSource.getRepository(AuthChallenge),
     inject: ['DATA_SOURCE'],
   },
   {

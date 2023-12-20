@@ -1,12 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Contact {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column('text')
-  ownerPhoneNumber: string;
 
   @Column('text')
   name: string;
@@ -19,4 +17,7 @@ export class Contact {
 
   @Column('text')
   imageUrl: string;
+
+  @ManyToOne(() => User, (user) => user.contacts)
+  user: User;
 }

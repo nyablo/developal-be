@@ -18,8 +18,8 @@ export const databaseProviders = [
         username: RDS_USERNAME,
         password: RDS_PASSWORD,
         database: RDS_DB_NAME,
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // TODO must be disabled in prod (the real prod)
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        synchronize: true, // TODO must be disabled in prod
       });
 
       return dataSource.initialize();
