@@ -3,4 +3,5 @@ export class CreateContactDto {
   email: string;
   message: string;
   imageUrl: string;
+  ownerPhoneNumber: string;
 }
