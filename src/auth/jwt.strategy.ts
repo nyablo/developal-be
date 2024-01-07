@@ -9,7 +9,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'firebase-jwt') {
     super(
       {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        secretOrKey: process.env.FIREBASE_PUBLIC_KEY,
+        secretOrKey:
+          process.env.FIREBASE_PUBLIC_KEY_PT1 +
+          process.env.FIREBASE_PUBLIC_KEY_PT2,
         algorithms: ['RS256'],
         requestProperty: 'user',
         passReqToCallback: true,
@@ -29,7 +31,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'firebase-jwt') {
       admin.initializeApp({
         credential: admin.credential.cert({
           projectId: process.env.FIREBASE_PROJECT_ID,
-          privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+          privateKey: (
+            process.env.FIREBASE_PRIVATE_KEY_PT1 +
+            process.env.FIREBASE_PRIVATE_KEY_PT2
+          ).replace(/\\n/g, '\n'),
           clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
         }),
       });
